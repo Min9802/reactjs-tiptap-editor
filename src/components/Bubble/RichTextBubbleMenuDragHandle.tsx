@@ -96,7 +96,7 @@ export function RichTextBubbleMenuDragHandle() {
       setCurrentNodePos(data.pos);
       // Force update bubble menu position
       requestAnimationFrame(() => {
-        data.editor.commands.focus();
+        data.editor.commands.focus(undefined, { scrollIntoView: false });
       });
     },
     []
