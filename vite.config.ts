@@ -104,7 +104,7 @@ export default defineConfig(async ({ mode }) => {
       rollupOptions: {
         output: {
           assetFileNames: (assetInfo) => {
-            if (assetInfo.name == 'reactjs-tiptap-editor.css') return 'style.css';
+            if (assetInfo.name && assetInfo.name.endsWith('.css')) return 'style.css';
             return assetInfo.name;
           },
         },

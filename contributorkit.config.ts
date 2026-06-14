@@ -2,7 +2,7 @@ import { defineConfig } from 'contributorkit';
 
 export default defineConfig({
   outputDir: './screenshot',
-  owner: 'hunghg255',
+  owner: 'Min9802',
   repo: 'reactjs-tiptap-editor',
   renders: [
     {

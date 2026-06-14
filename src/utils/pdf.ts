@@ -47,7 +47,7 @@ function printHtml(content: string, exportPdfOptions: ExportPdfOptions) {
           }
         }
       </style>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reactjs-tiptap-editor@latest/lib/style.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@min98/tiptap-editor@latest/lib/style.css">
     </head>
     <body>
       <div class="print-container">

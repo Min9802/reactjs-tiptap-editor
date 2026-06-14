@@ -391,15 +391,15 @@ importers:
 
   playground:
     dependencies:
+      '@min98/tiptap-editor':
+        specifier: workspace:*
+        version: link:..
       react:
         specifier: ^19.1.0
         version: 19.2.4
       react-dom:
         specifier: ^19.1.0
         version: 19.2.4(react@19.2.4)
-      reactjs-tiptap-editor:
-        specifier: workspace:*
-        version: link:..
     devDependencies:
       '@types/node':
         specifier: ^22.14.0

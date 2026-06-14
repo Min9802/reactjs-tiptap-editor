@@ -22,10 +22,10 @@ import ts from 'highlight.js/lib/languages/typescript';
 import html from 'highlight.js/lib/languages/xml';
 import { all, createLowlight } from 'lowlight';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { RichTextProvider } from 'reactjs-tiptap-editor';
-import { Attachment, RichTextAttachment } from 'reactjs-tiptap-editor/attachment';
-import { Blockquote, RichTextBlockquote } from 'reactjs-tiptap-editor/blockquote';
-import { Bold, RichTextBold } from 'reactjs-tiptap-editor/bold';
+import { RichTextProvider } from '@min98/tiptap-editor';
+import { Attachment, RichTextAttachment } from '@min98/tiptap-editor/attachment';
+import { Blockquote, RichTextBlockquote } from '@min98/tiptap-editor/blockquote';
+import { Bold, RichTextBold } from '@min98/tiptap-editor/bold';
 // Bubble
 import {
   RichTextBubbleCallout,
@@ -44,63 +44,63 @@ import {
   RichTextBubbleTwitter,
   RichTextBubbleMenuDragHandle,
   RichTextBubbleCodeBlock,
-} from 'reactjs-tiptap-editor/bubble';
-import { BulletList, RichTextBulletList } from 'reactjs-tiptap-editor/bulletlist';
-import { Callout, RichTextCallout } from 'reactjs-tiptap-editor/callout';
-import { Clear, RichTextClear } from 'reactjs-tiptap-editor/clear';
-import { Code, RichTextCode } from 'reactjs-tiptap-editor/code';
-import { CodeBlock, RichTextCodeBlock } from 'reactjs-tiptap-editor/codeblock';
-import { CodeView, RichTextCodeView } from 'reactjs-tiptap-editor/codeview';
-import { Color, RichTextColor } from 'reactjs-tiptap-editor/color';
+} from '@min98/tiptap-editor/bubble';
+import { BulletList, RichTextBulletList } from '@min98/tiptap-editor/bulletlist';
+import { Callout, RichTextCallout } from '@min98/tiptap-editor/callout';
+import { Clear, RichTextClear } from '@min98/tiptap-editor/clear';
+import { Code, RichTextCode } from '@min98/tiptap-editor/code';
+import { CodeBlock, RichTextCodeBlock } from '@min98/tiptap-editor/codeblock';
+import { CodeView, RichTextCodeView } from '@min98/tiptap-editor/codeview';
+import { Color, RichTextColor } from '@min98/tiptap-editor/color';
 import {
   Column,
   ColumnNode,
   MultipleColumnNode,
   RichTextColumn,
-} from 'reactjs-tiptap-editor/column';
-import { Drawer, RichTextDrawer } from 'reactjs-tiptap-editor/drawer';
-import { Emoji, RichTextEmoji } from 'reactjs-tiptap-editor/emoji';
-import { Excalidraw, RichTextExcalidraw } from 'reactjs-tiptap-editor/excalidraw';
-import { ExportPdf, RichTextExportPdf } from 'reactjs-tiptap-editor/exportpdf';
-import { ExportWord, RichTextExportWord } from 'reactjs-tiptap-editor/exportword';
-import { FontFamily, RichTextFontFamily } from 'reactjs-tiptap-editor/fontfamily';
-import { FontSize, RichTextFontSize } from 'reactjs-tiptap-editor/fontsize';
-import { Heading, RichTextHeading } from 'reactjs-tiptap-editor/heading';
-import { Highlight, RichTextHighlight } from 'reactjs-tiptap-editor/highlight';
+} from '@min98/tiptap-editor/column';
+import { Drawer, RichTextDrawer } from '@min98/tiptap-editor/drawer';
+import { Emoji, RichTextEmoji } from '@min98/tiptap-editor/emoji';
+import { Excalidraw, RichTextExcalidraw } from '@min98/tiptap-editor/excalidraw';
+import { ExportPdf, RichTextExportPdf } from '@min98/tiptap-editor/exportpdf';
+import { ExportWord, RichTextExportWord } from '@min98/tiptap-editor/exportword';
+import { FontFamily, RichTextFontFamily } from '@min98/tiptap-editor/fontfamily';
+import { FontSize, RichTextFontSize } from '@min98/tiptap-editor/fontsize';
+import { Heading, RichTextHeading } from '@min98/tiptap-editor/heading';
+import { Highlight, RichTextHighlight } from '@min98/tiptap-editor/highlight';
 // build extensions
-import { History, RichTextUndo, RichTextRedo } from 'reactjs-tiptap-editor/history';
-import { HorizontalRule, RichTextHorizontalRule } from 'reactjs-tiptap-editor/horizontalrule';
-import { Iframe, RichTextIframe } from 'reactjs-tiptap-editor/iframe';
-import { Image, RichTextImage } from 'reactjs-tiptap-editor/image';
-import { ImageGif, RichTextImageGif } from 'reactjs-tiptap-editor/imagegif';
-import { ImportWord, RichTextImportWord } from 'reactjs-tiptap-editor/importword';
-import { Indent, RichTextIndent } from 'reactjs-tiptap-editor/indent';
-import { Italic, RichTextItalic } from 'reactjs-tiptap-editor/italic';
-import { Katex, RichTextKatex } from 'reactjs-tiptap-editor/katex';
-import { LineHeight, RichTextLineHeight } from 'reactjs-tiptap-editor/lineheight';
-import { Link, RichTextLink } from 'reactjs-tiptap-editor/link';
-import { localeActions, useLocale } from 'reactjs-tiptap-editor/locale-bundle';
-import { MarkdownPaste } from 'reactjs-tiptap-editor/markdownpaste';
-import { Mention } from 'reactjs-tiptap-editor/mention';
-import { Mermaid, RichTextMermaid } from 'reactjs-tiptap-editor/mermaid';
-import { MoreMark, RichTextMoreMark } from 'reactjs-tiptap-editor/moremark';
-import { OrderedList, RichTextOrderedList } from 'reactjs-tiptap-editor/orderedlist';
-import { SearchAndReplace, RichTextSearchAndReplace } from 'reactjs-tiptap-editor/searchandreplace';
+import { History, RichTextUndo, RichTextRedo } from '@min98/tiptap-editor/history';
+import { HorizontalRule, RichTextHorizontalRule } from '@min98/tiptap-editor/horizontalrule';
+import { Iframe, RichTextIframe } from '@min98/tiptap-editor/iframe';
+import { Image, RichTextImage } from '@min98/tiptap-editor/image';
+import { ImageGif, RichTextImageGif } from '@min98/tiptap-editor/imagegif';
+import { ImportWord, RichTextImportWord } from '@min98/tiptap-editor/importword';
+import { Indent, RichTextIndent } from '@min98/tiptap-editor/indent';
+import { Italic, RichTextItalic } from '@min98/tiptap-editor/italic';
+import { Katex, RichTextKatex } from '@min98/tiptap-editor/katex';
+import { LineHeight, RichTextLineHeight } from '@min98/tiptap-editor/lineheight';
+import { Link, RichTextLink } from '@min98/tiptap-editor/link';
+import { localeActions, useLocale } from '@min98/tiptap-editor/locale-bundle';
+import { MarkdownPaste } from '@min98/tiptap-editor/markdownpaste';
+import { Mention } from '@min98/tiptap-editor/mention';
+import { Mermaid, RichTextMermaid } from '@min98/tiptap-editor/mermaid';
+import { MoreMark, RichTextMoreMark } from '@min98/tiptap-editor/moremark';
+import { OrderedList, RichTextOrderedList } from '@min98/tiptap-editor/orderedlist';
+import { SearchAndReplace, RichTextSearchAndReplace } from '@min98/tiptap-editor/searchandreplace';
 // Slash Command
-import { SlashCommand, SlashCommandList } from 'reactjs-tiptap-editor/slashcommand';
-import { Strike, RichTextStrike } from 'reactjs-tiptap-editor/strike';
-import { Table, RichTextTable } from 'reactjs-tiptap-editor/table';
-import { TaskList, RichTextTaskList } from 'reactjs-tiptap-editor/tasklist';
-import { TextAlign, RichTextAlign } from 'reactjs-tiptap-editor/textalign';
-import { TextDirection, RichTextTextDirection } from 'reactjs-tiptap-editor/textdirection';
-import { TextUnderline, RichTextUnderline } from 'reactjs-tiptap-editor/textunderline';
-import { themeActions, useTheme } from 'reactjs-tiptap-editor/theme';
-import { Twitter, RichTextTwitter } from 'reactjs-tiptap-editor/twitter';
-import { Video, RichTextVideo } from 'reactjs-tiptap-editor/video';
+import { SlashCommand, SlashCommandList } from '@min98/tiptap-editor/slashcommand';
+import { Strike, RichTextStrike } from '@min98/tiptap-editor/strike';
+import { Table, RichTextTable } from '@min98/tiptap-editor/table';
+import { TaskList, RichTextTaskList } from '@min98/tiptap-editor/tasklist';
+import { TextAlign, RichTextAlign } from '@min98/tiptap-editor/textalign';
+import { TextDirection, RichTextTextDirection } from '@min98/tiptap-editor/textdirection';
+import { TextUnderline, RichTextUnderline } from '@min98/tiptap-editor/textunderline';
+import { themeActions, useTheme } from '@min98/tiptap-editor/theme';
+import { Twitter, RichTextTwitter } from '@min98/tiptap-editor/twitter';
+import { Video, RichTextVideo } from '@min98/tiptap-editor/video';
 
 import { EMOJI_LIST } from '@/emojis';
 
-import 'reactjs-tiptap-editor/style.css';
+import '@min98/tiptap-editor/style.css';
 // const ydoc = new Y.Doc()
 import 'katex/dist/katex.min.css';
 import 'easydrawer/styles.css';
